@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Customer;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
-        factory(User::class,1)->create();
+        factory(Customer::class,50)->create();
+       // $this->call(InvoiceTableSeeder::class);
     }
 }

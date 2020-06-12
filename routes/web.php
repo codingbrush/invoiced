@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/customer','CustomerController@index')->name('customer.index');
+Route::get('/customer/create','CustomerController@create')->name('customer.create');
+Route::get('/customer/show/{id}','CustomerController@show')->name('customer.show');
+
+Route::get('/customer/{id}/edit','CustomerController@edit')->name('customer.edit');
+
+
 
 Auth::routes([
     'register' => false
