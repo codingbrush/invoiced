@@ -1,10 +1,12 @@
 <?php
 
+use App\Customer;
 use Illuminate\Database\Seeder;
-use App\Invoice; 
-use App\InvoiceItem; 
+use App\Invoice;
+use App\InvoiceItem;
 use App\User;
 use Faker\Factory;
+use Illuminate\Support\Carbon;
 
 class InvoiceTableSeeder extends Seeder
 {
@@ -19,8 +21,11 @@ class InvoiceTableSeeder extends Seeder
 		User::truncate();
 		Invoice::truncate();
 		InvoiceItem::truncate();
+		Customer::truncate();
 
+		//Generate user and customers from factory files
 		factory(User::class, 1)->create();
+        //factory(Customer::class,50)->create();
 
 		foreach (range(1, 20) as $i) {
 			//$items = collect();
@@ -40,18 +45,23 @@ class InvoiceTableSeeder extends Seeder
 			    $discount = mt_rand(0, 100);
 				$grandtotal = $subtotal - $discount;
 				//$invoiceno = 0;
+                $customer = Customer::create([
+                   'name' => $faker->name,
+                   'company' => $faker->company,
+                   'address' => $faker->address,
+                   'phone' => $faker->phoneNumber
+                ]);
 
-			
 				$invoice = Invoice::create([
 					'invoice_no' => $faker->numberBetween(1000,4000),
-					'invoice_date' => $faker->date('Y-m-d',31),
-					'due_date' => $faker->date('Y-m-d',31),
+					'invoice_date' => now(),
+					'due_date' => Carbon::now(),
 					'discount' => $discount,
 					'title' => $faker->word,
 					'grand_total' => $grandtotal,
 					'subtotal' => $subtotal
 				]);
-			
+			$customer->invoice()->attach($invoice->id);
 		}
 	}
 

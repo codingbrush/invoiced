@@ -14,4 +14,18 @@ class Invoice extends Model
     {
     	return $this->hasMany(InvoiceItem::class);
     }
+
+    public function customer()
+    {
+        return $this->belongsToMany(Customer::class);
+    }
+
+    public static function search(String $query)
+    {
+        return empty($query) ? static::query()
+            : static::where('invoice_no', 'like', '%'.$query.'%')
+                ->orWhere('invoice_date', 'like', '%'.$query.'%')
+                ->orWhere('due_date','like','%'.$query.'%')
+                ->orWhere('title','like','%'.$query.'%');
+    }
 }

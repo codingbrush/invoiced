@@ -22,11 +22,13 @@ Route::get('/customer/create','CustomerController@create')->name('customer.creat
 Route::get('/customer/show/{id}','CustomerController@show')->name('customer.show');
 
 Route::get('/customer/{id}/edit','CustomerController@edit')->name('customer.edit');
+Route::post('/customer','CustomerController@store')->name('customer.store');
 
+//invoice
+Route::resource('/invoice','InvoiceController');
 
 
 Auth::routes([
     'register' => false
 ]);
-
 Route::get('/home', 'HomeController@index')->name('home');

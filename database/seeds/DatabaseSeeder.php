@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(Customer::class,50)->create();
-       // $this->call(InvoiceTableSeeder::class);
+       // factory(Customer::class,50)->create();
+        $this->call(InvoiceTableSeeder::class);
     }
 }

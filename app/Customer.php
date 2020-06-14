@@ -12,8 +12,13 @@ class Customer extends Model
     {
         return empty($query) ? static::query()
             : static::where('name', 'like', '%'.$query.'%')
-                ->orWhere('email', 'like', '%'.$query.'%')
+                ->orWhere('address', 'like', '%'.$query.'%')
                 ->orWhere('company','like','%'.$query.'%')
                 ->orWhere('phone','like','%'.$query.'%');
+    }
+
+    public function invoice()
+    {
+        return $this->belongsToMany(Invoice::class);
     }
 }
