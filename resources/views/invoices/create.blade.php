@@ -36,7 +36,7 @@
                         <input type="date" name="invoice_date" id="invoice_date" class="form-control">
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="due_date">Issue Date:</label>
+                        <label for="due_date">Due Date:</label>
                         <input type="date" name="due_date" id="due_date" class="form-control">
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td>
+                                    <td colspan="3" >
                                     
                                     </td>
                                     <td>
@@ -79,14 +79,14 @@
                                         <input type="text" name="grand_total" id="grand_total" class="form-control"
                                             readonly>
                                     </td>
-                                    <td colspan="4" class="text-right"><button type="button" class="btn btn-info"
+                                    <td class="text-right"><button type="button" class="btn btn-info"
                                             @click="addNewField()">+</button></td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
-                <input type="submit" value="Create Invoice">
+                <input type="submit" value="Create Invoice" class="btn btn-primary btn-block-sm">
         </div>
         </form>
     </div>

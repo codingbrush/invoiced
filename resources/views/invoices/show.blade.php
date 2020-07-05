@@ -8,23 +8,22 @@
     <title>Invoice </title>
 </head>
 <body>
-    {{-- {{dd($invoices)}} --}}
     <div class="container mx-auto p-5">
     <section class="flex justify-between mb-3">
-        <div class="w-auto h-auto rounded shadow-lg">
-        <img src="{{asset('images/logo.png')}}" alt="deklegacylogo">
+        @foreach($invoices as $company)
+        <div class="w-20 h-20 rounded shadow-lg">
+        <img src="{{asset('images\/')}}{{$company->setting->logo}}" alt="deklegacylogo">
         </div>
         <div class="justify-center self-center">
-            @foreach ($settings as $setting)
-            <h3>{{$setting->company}}</h3>
-            <h3>{{$setting->address}}</h3>
-            <h3>{{$setting->telephone}}</h3>
-            <h3>{{$setting->website}}</h3>
-            <h3>{{$setting->email}}</h3>
-            @endforeach
+            
+            <h3>{{$company->setting->company}}</h3>
+            <h3>{{$company->setting->address}}</h3>
+            <h3>{{$company->setting->telephone}}</h3>
+            <h3>{{$company->setting->website}}</h3>
+            <h3>{{$company->setting->email}}</h3>
             
         </div>
-        
+        @endforeach
     </section>
     <section class="flex justify-between mb-3">
         @foreach ($invoices as $invoice)

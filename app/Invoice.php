@@ -20,6 +20,11 @@ class Invoice extends Model
         return $this->belongsToMany(Customer::class);
     }
 
+    public function setting()
+    {
+        return $this->belongsTo(Setting::class);
+    }
+
     public static function search(String $query)
     {
         return empty($query) ? static::query()

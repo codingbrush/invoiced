@@ -27,7 +27,7 @@ Route::post('/customer','CustomerController@store')->name('customer.store');
 Route::resource('/invoiceitem','InvoiceItemController');
 //invoice
 Route::resource('/invoice','InvoiceController');
-
+Route::resource('/settings','SettingController');
 
 Auth::routes([
     'register' => false

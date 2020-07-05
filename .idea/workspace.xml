@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a224f8e2-fdb8-4018-a52b-835cc0f5cb14" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a224f8e2-fdb8-4018-a52b-835cc0f5cb14" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="DONT_SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="DONT_SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -138,7 +136,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowDatabase.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dental" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
@@ -160,6 +158,7 @@
       <updated>1591968482528</updated>
       <workItem from="1591968516895" duration="141000" />
       <workItem from="1592075742037" duration="13479000" />
+      <workItem from="1592424602459" duration="62000" />
     </task>
     <servers />
   </component>
@@ -175,10 +174,11 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="570" y="262" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1592093728547" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1591968632751">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="569" y="165" key="FileChooserDialogImpl" timestamp="1592424664276">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591968632751" />
+    <state x="569" y="165" key="FileChooserDialogImpl/0.0.1680.1010@0.0.1680.1010" timestamp="1592424664276" />
     <state x="674" y="436" key="NewPhpFileDialog" timestamp="1592093329240">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
