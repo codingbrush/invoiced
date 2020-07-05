@@ -24,6 +24,7 @@ Route::get('/customer/show/{id}','CustomerController@show')->name('customer.show
 Route::get('/customer/{id}/edit','CustomerController@edit')->name('customer.edit');
 Route::post('/customer','CustomerController@store')->name('customer.store');
 
+Route::resource('/invoiceitem','InvoiceItemController');
 //invoice
 Route::resource('/invoice','InvoiceController');
 

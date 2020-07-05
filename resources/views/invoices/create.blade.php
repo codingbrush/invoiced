@@ -46,6 +46,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
+                                    <th>Description</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
                                     <th>Total</th>
@@ -55,25 +56,29 @@
                                 <template x-for="(field, index) in fields" :key="index">
                                     <tr>
                                         <td x-text="index + 1"></td>
-                                        <td><input x-model="field.quantity" type="number" name="quantity[]"
-                                                class="form-control" onkeyup="calc()"></td>
-                                        <td><input x-model="field.unit_price" type="number" name="unit_price[]"
-                                                class="form-control" onkeyup="calc()"></td>
-                                        <td><input x-model="field.total" type="number" name="total[]"
+                                        <td><input x-model="field.description" type="text" name="description[]"
                                                 class="form-control"></td>
+                                        <td><input x-model="field.quantity" type="number" name="quantity[]"
+                                                class="form-control" min="0"></td>
+                                        <td><input x-model="field.unit_price" type="number" name="unit_price[]"
+                                                class="form-control" step=0.10 min="0"></td>
+                                        <td><input x-model="field.total" type="number" name="total[]"
+                                                class="form-control" @click="calcTotal()"></td>
                                         <td><button type="button" class="btn btn-danger btn-small"
                                                 @click="removeField(index)">&times;</button></td>
                                     </tr>
                                 </template>
                             </tbody>
                             <tfoot>
-                                <div class="form-group">
-                                    <label for="subtotal">SubTotal</label>
-                                    <input type="text" name="subtotal" id="subtotal">
-                                    <label for="grand_total">Grand Total</label>
-                                    <input type="text" name="grand_total" id="grand_total">
-                                </div>
                                 <tr>
+                                    <td>
+                                    
+                                    </td>
+                                    <td>
+                                        <label for="grand_total">Grand Total</label>
+                                        <input type="text" name="grand_total" id="grand_total" class="form-control"
+                                            readonly>
+                                    </td>
                                     <td colspan="4" class="text-right"><button type="button" class="btn btn-info"
                                             @click="addNewField()">+</button></td>
                                 </tr>
@@ -90,15 +95,8 @@
 @endsection
 @push('scripts')
 <script>
-    const subtotal = document.querySelector('#subtotal');
-    const grandtotal = document.querySelector('#grand_total');
-
-    function calc()
-    {
-        let qty = document.getElementById('quantity');
-        console.log(qty);
-        
-    }
+    const grandtotal = document.getElementById('grand_total');
+    let subT = [];
 
     function handler() {
         return {
@@ -111,6 +109,22 @@
             },
             removeField(index) {
                 this.fields.splice(index, 1);
+            },
+            calcTotal() {
+                this.fields.forEach(fields => {
+                    fields.total = fields.quantity * fields.unit_price;
+                    //console.log(fields.total);
+                    this.calcSubTotal();
+                });
+            },
+            calcSubTotal() {
+                let total = 0;
+                this.fields.forEach(fields => {
+                    total += parseInt(fields.total, 10);
+
+                });
+                //console.log(grand_total);
+                grandtotal.value = total;
             }
         }
     }
