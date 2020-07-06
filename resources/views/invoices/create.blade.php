@@ -13,10 +13,19 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 form-group">
+                        <label for="setting">Company:</label>
+                        <select name="setting_id" id="setting" class="form-control">
+                            <option value="">Select Company</option>
+                            @foreach ($settings as $setting)
+                            <option value="{{$setting->id}}">{{$setting->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-group">
                         <label for="invoice_no">Invoice No:</label>
                         <input type="text" name="invoice_no" id="invoice_no" class="form-control">
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="title">Invoice Title:</label>
                         <input type="text" name="title" id="title" class="form-control">
                     </div>

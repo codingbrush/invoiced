@@ -59,7 +59,8 @@ class InvoiceTableSeeder extends Seeder
 					'discount' => $discount,
 					'title' => $faker->word,
 					'grand_total' => $grandtotal,
-					'subtotal' => $subtotal
+					'subtotal' => $subtotal,
+					'setting_id' => mt_rand(1, 2)
 				]);
 			$customer->invoice()->attach($invoice->id);
 		}

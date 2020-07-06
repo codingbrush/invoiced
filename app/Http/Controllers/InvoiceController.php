@@ -27,7 +27,8 @@ class InvoiceController extends Controller
     public function create()
     {
         $customers = $this->customer->all(['id', 'name']);
-        return view('invoices.create', compact('customers', $customers));
+        $settings = $this->setting->all(['id','name']);
+        return view('invoices.create', ['customers' => $customers,'setting' => $setting]);
     }
 
     public function show($id)
@@ -46,6 +47,7 @@ class InvoiceController extends Controller
             'customer_id'  => 'required',
             'invoice_date' => 'required',
             'due_date'     => 'required',
+            'setting_id'   => 'required'
         ]);
         if (!$validated) {
             return redirect()->back()->withInput($request->all());
@@ -58,6 +60,7 @@ class InvoiceController extends Controller
             'customer_id'  => $request->customer_id,
             'grand_total'  => $request->grand_total,
             'subtotal'     => $request->grand_total,
+            'setting_id'   => $request->setting_id
         ]);
         if (!$invoice) {
             return redirect()->back()->withInput($request->all());

@@ -22,6 +22,7 @@ class CreateInvoicesTable extends Migration
             $table->string('title');
             $table->decimal('grand_total',8,2);
             $table->decimal('subtotal',8,2);
+            $table->unsignedBigInteger('setting_id')->nullable();
             $table->timestamps();
         });
     }
