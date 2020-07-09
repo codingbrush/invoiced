@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    protected $invoice, $customer;
+    protected $invoice, $customer, $setting;
+    
     public function __construct(Invoice $invoice, Customer $customer, Setting $setting)
     {
         $this->customer = $customer;
@@ -27,8 +28,8 @@ class InvoiceController extends Controller
     public function create()
     {
         $customers = $this->customer->all(['id', 'name']);
-        $settings = $this->setting->all(['id','name']);
-        return view('invoices.create', ['customers' => $customers,'setting' => $setting]);
+        $settings = $this->setting->all(['id','company']);
+        return view('invoices.create', ['customers' => $customers,'settings' => $settings]);
     }
 
     public function show($id)
@@ -88,12 +89,23 @@ class InvoiceController extends Controller
 
     public function edit($id)
     {
+        $customers = $this->customer->all(['id', 'name']);
+        $settings = $this->setting->all(['id','company']);
+        $invoices = $this->invoice->with('customer','invoiceItem')->findOrFail($id);
+        return view('invoices.edit',['invoices' => $invoices,'customers' => $customers,'settings' => $settings]);
+    }
 
+    public function getEditData($id)
+    {
+        $customers = $this->customer->all(['id', 'name']);
+        $settings = $this->setting->all(['id','company']);
+        $invoices = $this->invoice->with('customer','invoiceItem')->findOrFail($id);
+        return view('invoices.edit',['invoices' => $invoices,'customers' => $customers,'settings' => $settings]);
     }
 
     public function update(Request $request, $id)
     {
-
+        dd($request->all());
     }
 
     public function destroy($id)

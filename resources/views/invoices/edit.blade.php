@@ -1,18 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="card">
         <div class="card-title">
             <h4>Create Invoice</h4>
-            {{-- {{ $invoices->invoiceItem }} --}}
+            {{-- {{ dd($invoices->setting_id) }} --}}
         </div>
         <div class="card-body">
             <form
-                action="{{route('invoice.store')}}"
+                action="{{route('invoice.update',$invoices->id)}}"
                 method="post">
-                @csrf
+                @csrf @method('PUT')
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="setting">Company:</label>
@@ -20,7 +19,7 @@
                             <option value="">Select Company</option>
                             @foreach ($settings as $setting)
                             <option value="{{$setting->id}}"
-                                >
+                                {{ ($setting->id == $invoices->setting_id) ? 'selected' : '' }}
                                 >{{$setting->company}}
                             </option>
                             @endforeach
@@ -29,12 +28,12 @@
                     <div class="col-md-3 form-group">
                         <label for="invoice_no">Invoice No:</label>
                         <input type="text" name="invoice_no" id="invoice_no" class="form-control"
-                            value="{{ old('invoice_no') }}">
+                            value="{{ $invoices->invoice_no ?? old('invoice_no') }}">
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="title">Invoice Title:</label>
                         <input type="text" name="title" id="title" class="form-control"
-                            value="{{ old('title') }}">
+                            value="{{ $invoices->title ?? old('title') }}">
                     </div>
                 </div>
                 <div class="row">
@@ -43,7 +42,8 @@
                         <select name="customer_id" id="customer" class="form-control">
                             <option value="">Select Customer</option>
                             @foreach ($customers as $customer)
-                            <option value="{{$customer->id}}">
+                            <option value="{{$customer->id}}"
+                                {{ ($invoices->customer[0]->id == $customer->id) ? 'selected' : '' }}>
                                 {{$customer->name}}</option>
                             @endforeach
                         </select>
@@ -51,15 +51,15 @@
                     <div class="col-md-3 form-group">
                         <label for="invoice_date">Issue Date:</label>
                         <input type="date" name="invoice_date" id="invoice_date" class="form-control"
-                            value="{{ old('invoice_date') }}">
+                            value="{{ $invoices->invoice_date ?? old('invoice_date') }}">
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="due_date">Due Date:</label>
                         <input type="date" name="due_date" id="due_date" class="form-control"
-                            value="{{ old('due_date') }}">
+                            value="{{ $invoices->due_date ?? old('due_date') }}">
                     </div>
                 </div>
-                <div class="row" x-data="handler()">
+                <div class="row" x-data="handler()" x-init="edit()">
                     <div class="col">
                         <table class="table table-bordered align-items-center table-sm">
                             <thead class="thead-light">
@@ -72,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
+                               
                                 <template x-for="(field, index) in fields" :key="index">
                                     <tr>
                                         <td x-text="index + 1"></td>
@@ -88,7 +88,7 @@
                                                 @click="removeField(index)">&times;</button></td>
                                     </tr>
                                 </template>
-                                
+                               
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -98,7 +98,7 @@
                                     <td>
                                         <label for="grand_total">Grand Total</label>
                                         <input type="text" name="grand_total" id="grand_total" class="form-control"
-                                            readonly value="{{ old('grand_total') }}">
+                                            readonly value="{{ $invoices->grand_total ?? old('grand_total') }}">
                                     </td>
                                     <td class="text-right"><button type="button" class="btn btn-info"
                                             @click="addNewField()">+</button></td>
@@ -107,19 +107,19 @@
                         </table>
                     </div>
                 </div>
-                <input type="submit" value="Create Invoice"
+                <input type="submit" value="Update Invoice"
                     class="btn btn-primary btn-block-sm">
         </div>
         </form>
     </div>
 </div>
-
 @endsection
-@push('scripts')
+@push('editscripts')
 <script>
     const grandtotal = document.getElementById('grand_total');
     let subT = [];
-
+    let url = window.location.href;
+    let csrf = document.querySelector('meta[name="csrf-token"]').content;
     function handler() {
         return {
            
@@ -148,6 +148,25 @@
                 });
                 //console.log(grand_total);
                 grandtotal.value = total;
+            },
+            edit()
+            {
+                
+                fetch(url, {
+                    headers : { 
+                        'method': 'GET',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrf,
+                    }
+
+                    })
+                .then((response) => response.json())
+                .then(function(data){
+                    console.log(data);
+                }).catch(function (error){
+                    console.log(error);
+                });
             }
             
     }
